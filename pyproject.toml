@@ -1,0 +1,101 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ecos"
+version = "0.1.0"
+description = "Event-Sourced Cognitive Operating System (E-COS) — Foundational primitives for a deterministic, branching, replayable cognitive runtime."
+authors = [
+    {name = "Ava Prime", email = "ava.prime@outlook.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Typing :: Typed",
+]
+keywords = ["event-sourcing", "cognitive-architecture", "agentic-systems", "deterministic-runtime", "skill-compiler", "epistemic-os"]
+dependencies = [
+    # Core runtime dependencies (minimal by design)
+    "pydantic>=2.8,<3.0",
+    "typing-extensions>=4.12",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5.0",
+    "pytest>=8.2,<9.0",
+    "pytest-cov>=5.0,<6.0",
+    "mypy>=1.10,<2.0",
+    "pre-commit>=3.7,<4.0",
+    "commitizen>=3.27,<4.0",
+    "mkdocs>=1.6,<2.0",
+    "mkdocs-material>=9.5,<10.0",
+]
+docs = [
+    "mkdocs>=1.6,<2.0",
+    "mkdocs-material>=9.5,<10.0",
+    "mkdocstrings[python]>=0.25,<1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/AvaPrime/ecos"
+Documentation = "https://github.com/AvaPrime/ecos#readme"
+Repository = "https://github.com/AvaPrime/ecos"
+Issues = "https://github.com/AvaPrime/ecos/issues"
+Changelog = "https://github.com/AvaPrime/ecos/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ecos"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM", "ARG", "PTH"]
+ignore = ["E501", "B008", "B904"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["ecos"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra -q --strict-markers --cov=src/ecos --cov-report=term-missing:skip-covered"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks integration tests",
+]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+strict_optional = true
+ignore_missing_imports = true
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "pep440"
+update_changelog_on_bump = true
+major_version_zero = true
