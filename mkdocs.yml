@@ -1,0 +1,18 @@
+site_name: E-COS Documentation
+site_description: Event-Sourced Cognitive Operating System
+repo_url: https://github.com/AvaPrime/ecos
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: teal
+
+nav:
+  - Home: index.md
+  - Architecture: ARCHITECTURE.md
+  - Roadmap: ROADMAP.md
+  - Changelog: CHANGELOG.md
+
+plugins:
+  - search
