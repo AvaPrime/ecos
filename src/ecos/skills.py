@@ -7,6 +7,7 @@ The SkillCompiler transforms high-level intent into executable ExecutionPlans.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Any, Callable, Protocol
 
 from pydantic import BaseModel, Field
@@ -100,6 +101,4 @@ class ExecutionPlan(BaseModel):
     plan_id: EventID
     steps: list[dict[str, Any]] = Field(default_factory=list)
     metadata: dict[str, Any] = Field(default_factory=dict)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))  # type: ignore[name-defined]
-
-# Fix: import datetime at top if needed, but for simplicity assume from datetime import datetime, timezone above
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
