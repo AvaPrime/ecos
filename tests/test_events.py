@@ -20,7 +20,7 @@ def test_event_with_causation(sample_event: Event) -> None:
     cause = EventID.new()
     caused = sample_event.with_causation(cause)
     assert caused.causation_id == cause
-    assert caused.id != sample_event.id  # new id generated? Wait, with_causation keeps id? No, model_copy keeps id unless updated
+    assert caused.id == sample_event.id  # model_copy preserves id; new event would have new id
 
 
 def test_inmemory_store_append_and_get(event_store: InMemoryEventStore, sample_event: Event) -> None:
